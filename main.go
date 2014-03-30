@@ -14,7 +14,7 @@ import (
 
 var (
 	port   = flag.Int("p", 5000, "port to serve on")
-	prefix = flag.String("pf", "/", "prefix to serve under")
+	prefix = flag.String("x", "/", "prefix to serve under")
 )
 
 func main() {

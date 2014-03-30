@@ -22,7 +22,7 @@ This will serve the current directory at ```http://localhost:5000/```
 
 Will serve the contents of the folder ```~/my-awesome-blog``` at ```http://localhost:9999/```
 
-	serve -pf /my ~/precious
+	serve -x /my ~/precious
 
 You guessed it, ```http://localhost:5000/my``` is now wired up to ```~/precious```
 
