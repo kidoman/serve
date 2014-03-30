@@ -6,10 +6,6 @@ The simplest directory serving web server.
 
 A simple:
 
-	brew install serve
-
-or:
-
 	go get github.com/kidoman/serve
 
 is more than sufficient. I would prefer you used the ```brew``` way though.
