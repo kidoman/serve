@@ -7,22 +7,31 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"net/http"
+	"os"
 	"strings"
 )
 
+var version = "0.1.2"
+
 var (
-	port   = flag.Int("p", 5000, "port to serve on")
-	prefix = flag.String("x", "/", "prefix to serve under")
+	port        = flag.Int("p", 5000, "port to serve on")
+	prefix      = flag.String("x", "/", "prefix to serve under")
+	showVersion = flag.Bool("v", false, "show version info")
 )
 
 func main() {
 	flag.Parse()
 
+	if *showVersion {
+		fmt.Println("serve version", version)
+		os.Exit(0)
+	}
+
 	// Get the dir to serve
 	if flag.NArg() < 1 {
-		log.Fatalln("Please provide the dir to serve as the last argument. A simple . will also do")
+		fmt.Println("Please provide the dir to serve as the last argument. A simple . will also do")
+		os.Exit(1)
 	}
 	dir := flag.Arg(0)
 	portStr := fmt.Sprintf(":%v", *port)
@@ -30,8 +39,8 @@ func main() {
 		*prefix = *prefix + "/"
 	}
 
-	log.Printf("Service traffic from %v under port %v with prefix %v\n", dir, *port, *prefix)
-	log.Printf("Or simply put, just open http://localhost:%v%v to get rocking!\n", *port, *prefix)
+	fmt.Printf("Service traffic from %v under port %v with prefix %v\n", dir, *port, *prefix)
+	fmt.Printf("Or simply put, just open http://localhost:%v%v to get rocking!\n", *port, *prefix)
 
 	http.Handle(*prefix, http.StripPrefix(*prefix, http.FileServer(http.Dir(dir))))
 	http.ListenAndServe(portStr, nil)
