@@ -1,8 +1,10 @@
 # serve
 
-The simplest directory serving web server.
+The simplest directory serving web server. 
 
-## How to get
+The program is written in Go but having the Go compiler installed in not a requirement as the binaries available below are self sufficient.
+
+## How to get it
 
 A simple:
 
