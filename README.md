@@ -2,17 +2,25 @@
 
 The simplest directory serving web server.
 
+## How to get
+
+A simple:
+
+	brew install serve
+
+or:
+
+	go get github.com/kidoman/serve
+
+is more than sufficient. I would prefer you used the ```brew``` way though.
+
 ## Platforms supported
 
-Anything you can run a precompiled binary on. Or simply do a:
-
-	go run main.go
-
-if you would rather go that way.
+Anything you can run a precompiled binary on (i.e. Windows, Mac OS X, Linux, etc.)
 
 ## How to use
 
-Provided you have ```serve``` under your path somewhere (it will soon be possible to just do a ```brew install serve```):
+Provided you have ```serve``` under your $PATH somewhere:
 
 	serve .
 
