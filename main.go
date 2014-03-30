@@ -20,11 +20,11 @@ var (
 func main() {
 	flag.Parse()
 
-	// Check if a dir has been provided, if not use .
-	dir := "."
-	if flag.NArg() > 0 {
-		dir = flag.Arg(0)
+	// Get the dir to serve
+	if flag.NArg() < 1 {
+		log.Fatalln("Please provide the dir to serve as the last argument. A simple . will also do")
 	}
+	dir := flag.Arg(0)
 	portStr := fmt.Sprintf(":%v", *port)
 	if !strings.HasSuffix(*prefix, "/") {
 		*prefix = *prefix + "/"

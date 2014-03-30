@@ -14,7 +14,7 @@ if you would rather go that way.
 
 Provided you have ```serve``` under your path somewhere (it will soon be possible to just do a ```brew install serve```):
 
-	serve
+	serve .
 
 This will serve the current directory at ```http://localhost:5000/```
 
