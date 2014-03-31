@@ -43,5 +43,8 @@ func main() {
 	fmt.Printf("Or simply put, just open http://localhost:%v%v to get rocking!\n", *port, *prefix)
 
 	http.Handle(*prefix, http.StripPrefix(*prefix, http.FileServer(http.Dir(dir))))
-	http.ListenAndServe(portStr, nil)
+	if err := http.ListenAndServe(portStr, nil); err != nil {
+		fmt.Fprintf(os.Stderr, "Error while starting the web server\n%v\n", err)
+		os.Exit(1)
+	}
 }
