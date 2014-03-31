@@ -42,6 +42,10 @@ Will serve the contents of the folder ```~/my-awesome-blog``` at ```http://local
 
 You guessed it, ```http://localhost:5000/my``` is now wired up to ```~/precious```
 
+	serve -o ~/sesame
+
+Wires up ```http://localhost:5000``` to ~/sesame and opens the URL in your favorite browser while it is at it.
+
 ## Coming soon
 
 * HTTPS support
