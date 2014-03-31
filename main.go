@@ -7,9 +7,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net"
 	"net/http"
 	"os"
+	"os/exec"
 	"strings"
+	"time"
 )
 
 var version = "0.1.4"
@@ -18,6 +21,7 @@ var (
 	port        = flag.Int("p", 5000, "port to serve on")
 	prefix      = flag.String("x", "/", "prefix to serve under")
 	showVersion = flag.Bool("v", false, "show version info")
+	openBrowser = flag.Bool("o", false, "open the url")
 )
 
 func main() {
@@ -39,12 +43,48 @@ func main() {
 		*prefix = *prefix + "/"
 	}
 
+	uri := fmt.Sprintf("http://localhost:%v%v", *port, *prefix)
+
 	fmt.Printf("Service traffic from %v under port %v with prefix %v\n", dir, *port, *prefix)
-	fmt.Printf("Or simply put, just open http://localhost:%v%v to get rocking!\n", *port, *prefix)
+	fmt.Printf("Or simply put, just open %v to get rocking!\n", uri)
+
+	go func() {
+		if *openBrowser {
+			success := waitForWebserver()
+			if !success {
+				// We have waited too long for the webserver to start; bail.
+				fmt.Fprintf(os.Stderr, "The webserver did not start within the required time. Cannot open the browser for you\n")
+				return
+			}
+			fmt.Printf("Opening your browser to %v\n", uri)
+			cmd := exec.Command("open", uri)
+			if err := cmd.Run(); err != nil {
+				fmt.Fprintf(os.Stderr, "Could not open the url in your browser\n%v\n", err)
+			}
+		}
+	}()
 
 	http.Handle(*prefix, http.StripPrefix(*prefix, http.FileServer(http.Dir(dir))))
 	if err := http.ListenAndServe(portStr, nil); err != nil {
 		fmt.Fprintf(os.Stderr, "Error while starting the web server\n%v\n", err)
 		os.Exit(1)
+	}
+}
+
+func waitForWebserver() bool {
+	timeout := time.After(1 * time.Second)
+	connStr := fmt.Sprintf("127.0.0.1:%v", *port)
+	for {
+		select {
+		case <-timeout:
+			return false
+		default:
+			conn, err := net.DialTimeout("tcp", connStr, 50*time.Millisecond)
+			if err != nil {
+				continue
+			}
+			conn.Close()
+			return true
+		}
 	}
 }
