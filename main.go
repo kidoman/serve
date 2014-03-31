@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-var version = "0.1.4"
+var version = "0.2.0"
 
 var (
 	port        = flag.Int("p", 5000, "port to serve on")
