@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-var version = "0.2.0"
+var version = "0.2.1"
 
 var (
 	port        = flag.Int("p", 5000, "port to serve on")
@@ -39,6 +39,9 @@ func main() {
 	}
 	dir := flag.Arg(0)
 	portStr := fmt.Sprintf(":%v", *port)
+	if !strings.HasPrefix(*prefix, "/") {
+		*prefix = "/" + *prefix
+	}
 	if !strings.HasSuffix(*prefix, "/") {
 		*prefix = *prefix + "/"
 	}
