@@ -32,12 +32,17 @@ func main() {
 		os.Exit(0)
 	}
 
+	var dir string
 	// Get the dir to serve
 	if flag.NArg() < 1 {
-		fmt.Println("Please provide the dir to serve as the last argument. A simple . will also do")
-		os.Exit(1)
+		cwd, err := os.Getwd()
+		if err != nil {
+			fmt.Println("Please provide the dir to serve as the last argument. A simple . will also do")
+			os.Exit(1)
+		}
+		dir = cwd
 	}
-	dir := flag.Arg(0)
+	dir = flag.Arg(0)
 	portStr := fmt.Sprintf(":%v", *port)
 	if !strings.HasPrefix(*prefix, "/") {
 		*prefix = "/" + *prefix
