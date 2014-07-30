@@ -14,11 +14,9 @@ or:
 
 	brew install kidoman/tools/serve
 
-will get the job done. Also, you can download precompiled versions to place in your ```/usr/local/bin``` from the below links:
+will get the job done. Also, you can download precompiled releases to place in your ```/usr/local/bin``` from:
 
-* [Mac OS X 64 bit](https://dl.dropboxusercontent.com/u/6727135/Binaries/serve/darwin-amd64/serve)
-* [Linux 64 bit](https://dl.dropboxusercontent.com/u/6727135/Binaries/serve/linux-amd64/serve)
-* [Linux 32 bit](https://dl.dropboxusercontent.com/u/6727135/Binaries/serve/linux-386/serve)
+https://github.com/kidoman/serve/releases/latest
 
 PS: We should hopefully be in the official brew repo soon. Then a ```brew install serve``` will be sufficient.
 
