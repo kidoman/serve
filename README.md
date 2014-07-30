@@ -1,6 +1,6 @@
 # serve
 
-The simplest directory serving web server. 
+The simplest directory serving web server.
 
 The program is written in Go but having the Go compiler installed in not a requirement as the binaries available below are self sufficient.
 
@@ -20,7 +20,7 @@ will get the job done. Also, you can download precompiled versions to place in y
 * [Linux 64 bit](https://dl.dropboxusercontent.com/u/6727135/Binaries/serve/linux-amd64/serve)
 * [Linux 32 bit](https://dl.dropboxusercontent.com/u/6727135/Binaries/serve/linux-386/serve)
 
-PS: We should hopefully be in the official brew repo soon. Then a ```brew install serve``` will be sufficient. 
+PS: We should hopefully be in the official brew repo soon. Then a ```brew install serve``` will be sufficient.
 
 ## Platforms supported
 
@@ -30,7 +30,7 @@ Anything you can run a precompiled binary on (i.e. Windows, Mac OS X, Linux, etc
 
 Provided you have ```serve``` under your $PATH somewhere:
 
-	serve .
+	serve
 
 This will serve the current directory at ```http://localhost:5000/```
 
