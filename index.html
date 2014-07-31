@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Serve by kidoman</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Serve</h1>
+        <p>Insanely useful local webserver</p>
+
+        <p class="view"><a href="https://github.com/kidoman/serve">View the Project on GitHub <small>kidoman/serve</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/kidoman/serve/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/kidoman/serve/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/kidoman/serve">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="serve" class="anchor" href="#serve"><span class="octicon octicon-link"></span></a>serve</h1>
+
+<p>The simplest directory serving web server.</p>
+
+<p>The program is written in Go but having the Go compiler installed in not a requirement as the binaries available below are self sufficient.</p>
+
+<h2>
+<a name="how-to-get-it" class="anchor" href="#how-to-get-it"><span class="octicon octicon-link"></span></a>How to get it</h2>
+
+<p>A simple:</p>
+
+<pre><code>go get github.com/kidoman/serve
+</code></pre>
+
+<p>or:</p>
+
+<pre><code>brew install kidoman/tools/serve
+</code></pre>
+
+<p>will get the job done. Also, you can download precompiled releases to place in your <code>/usr/local/bin</code> from:</p>
+
+<p><a href="https://github.com/kidoman/serve/releases/latest">https://github.com/kidoman/serve/releases/latest</a></p>
+
+<p>PS: We should hopefully be in the official brew repo soon. Then a <code>brew install serve</code> will be sufficient.</p>
+
+<h2>
+<a name="platforms-supported" class="anchor" href="#platforms-supported"><span class="octicon octicon-link"></span></a>Platforms supported</h2>
+
+<p>Anything you can run a precompiled binary on (i.e. Windows, Mac OS X, Linux, etc.)</p>
+
+<h2>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h2>
+
+<p>Provided you have <code>serve</code> under your $PATH somewhere:</p>
+
+<pre><code>serve
+</code></pre>
+
+<p>This will serve the current directory at <code>http://localhost:5000/</code></p>
+
+<pre><code>serve -p 9999 ~/my-awesome-blog
+</code></pre>
+
+<p>Will serve the contents of the folder <code>~/my-awesome-blog</code> at <code>http://localhost:9999/</code></p>
+
+<pre><code>serve -x /my ~/precious
+</code></pre>
+
+<p>You guessed it, <code>http://localhost:5000/my</code> is now wired up to <code>~/precious</code></p>
+
+<pre><code>serve -o ~/sesame
+</code></pre>
+
+<p>Wires up <code>http://localhost:5000</code> to <code>~/sesame</code> and opens the URL in your favorite browser while it is at it.</p>
+
+<h2>
+<a name="coming-soon" class="anchor" href="#coming-soon"><span class="octicon octicon-link"></span></a>Coming soon</h2>
+
+<ul>
+<li>HTTPS support</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/kidoman">kidoman</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
