@@ -7,6 +7,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/abbot/go-http-auth"
+	"log"
 	"net"
 	"net/http"
 	"os"
@@ -15,14 +17,24 @@ import (
 	"time"
 )
 
-var version = "0.2.3"
+var version = "0.2.4"
 
 var (
 	port        = flag.Int("p", 5000, "port to serve on")
 	prefix      = flag.String("x", "/", "prefix to serve under")
 	showVersion = flag.Bool("v", false, "show version info")
 	openBrowser = flag.Bool("o", false, "open the url")
+	httpAuth    = flag.Bool("a", false, "requires random http auth")
+	password	= "hello"
+	username	= "serve"
 )
+
+func Secret(user, realm string) string {
+	if user == "serve" {
+		return "$1$dlPL2MqE$oQmn16q49SqdmhenQuNgs1"	// hello
+	}
+	return ""
+}
 
 func main() {
 	flag.Parse()
@@ -55,7 +67,9 @@ func main() {
 
 	fmt.Printf("Service traffic from %v under port %v with prefix %v\n", dir, *port, *prefix)
 	fmt.Printf("Or simply put, just open %v to get rocking!\n", uri)
-
+	if *httpAuth {
+		fmt.Printf("user: %v password: %v\n", username, password)
+	}
 	go func() {
 		if *openBrowser {
 			success := waitForWebserver()
@@ -72,10 +86,24 @@ func main() {
 		}
 	}()
 
-	http.Handle(*prefix, http.StripPrefix(*prefix, http.FileServer(http.Dir(dir))))
+	authenticator := auth.NewBasicAuthenticator("Serve Credentials", Secret)
+	if *httpAuth {
+		http.HandleFunc("/", auth.JustCheck(authenticator, handleFileServer(dir, "/")))
+	} else {
+		http.HandleFunc("/",  handleFileServer(dir, "/"))
+	}
 	if err := http.ListenAndServe(portStr, nil); err != nil {
 		fmt.Fprintf(os.Stderr, "Error while starting the web server\n%v\n", err)
 		os.Exit(1)
+	}
+}
+
+func handleFileServer(dir, prefix string) http.HandlerFunc {
+	fs := http.FileServer(http.Dir(dir))
+	realHandler := http.StripPrefix(prefix, fs).ServeHTTP
+	return func(w http.ResponseWriter, req *http.Request) {
+		log.Println(req.URL)
+		realHandler(w, req)
 	}
 }
 
