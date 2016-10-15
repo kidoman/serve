@@ -25,13 +25,13 @@ var (
 	showVersion = flag.Bool("v", false, "show version info")
 	openBrowser = flag.Bool("o", false, "open the url")
 	httpAuth    = flag.Bool("a", false, "requires random http auth")
-	password	= "hello"
-	username	= "serve"
+	password    = "hello"
+	username    = "serve"
 )
 
 func Secret(user, realm string) string {
 	if user == "serve" {
-		return "$1$dlPL2MqE$oQmn16q49SqdmhenQuNgs1"	// hello
+		return "$1$dlPL2MqE$oQmn16q49SqdmhenQuNgs1" // hello
 	}
 	return ""
 }
@@ -90,7 +90,7 @@ func main() {
 	if *httpAuth {
 		http.HandleFunc("/", auth.JustCheck(authenticator, handleFileServer(dir, "/")))
 	} else {
-		http.HandleFunc("/",  handleFileServer(dir, "/"))
+		http.HandleFunc("/", handleFileServer(dir, "/"))
 	}
 	if err := http.ListenAndServe(portStr, nil); err != nil {
 		fmt.Fprintf(os.Stderr, "Error while starting the web server\n%v\n", err)
