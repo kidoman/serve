@@ -32,6 +32,10 @@ Provided you have ```serve``` under your $PATH somewhere:
 
 This will serve the current directory at ```http://localhost:5000/```
 
+	serve -a
+	
+Will require visitor to provide http-auth credentials.
+
 	serve -p 9999 ~/my-awesome-blog
 
 Will serve the contents of the folder ```~/my-awesome-blog``` at ```http://localhost:9999/```
